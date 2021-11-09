@@ -3,12 +3,14 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import InfoBox from './InfoBox.js';
 import Map from './Map.js';
+import Table from './Table.js';
 
 const App = () => {
 	/* Set initial variable values */
 	const [countries, setCountries] = useState([]);
 	const [country, setCountry] = useState(('worldwide'));
 	const [countryInfo, setCountryInfo] = useState({});
+	const [tableData, setTableData] = useState([]);
 	
 	useEffect(() => {
 		fetch(`https://disease.sh/v3/covid-19/all`).then(response => response.json()).then(data => {
@@ -30,6 +32,7 @@ const App = () => {
 						};
 					});
 					
+					setTableData(data);
 					setCountries(countries);
 				});
 		};
@@ -81,7 +84,7 @@ const App = () => {
 			<Card className="app__right">
 				<CardContent>
 					<h3>Live Cases by Country</h3>
-					
+					<Table countries={tableData}/>
 					<h3>Worldwide New Cases</h3>
 				</CardContent>
 			</Card>
