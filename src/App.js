@@ -1,4 +1,4 @@
-import { FormControl, MenuItem, Select } from '@mui/material';
+import { Card, CardContent, FormControl, MenuItem, Select } from '@mui/material';
 import './App.css';
 import { useEffect, useState } from 'react';
 import InfoBox from './InfoBox.js';
@@ -8,6 +8,7 @@ const App = () => {
 	/* Set initial variable values */
 	const [countries, setCountries] = useState([]);
 	const [country, setCountry] = useState(('worldwide'));
+	const [countryInfo, setCountryInfo] = useState({});
 	
 	/* Call api */
 	useEffect(() => {
@@ -31,10 +32,19 @@ const App = () => {
 		
 	}, []);
 	
-	const onCountryChange = (event) => {
+	/* Get all country info */
+	const onCountryChange = async (event) => {
 		const countryCode = event.target.value;
 		
 		setCountry(countryCode);
+		
+		const url = countryCode === 'worldwide' ? `https://disease.sh/v3/covid-19/all` : `https://disease.sh/v3/covid-19/countries/${countryCode}?strict=true`;
+		
+		await fetch(url).then(response => response.json()).then(data => {
+			setCountry(countryCode);
+			/* All data from country */
+			setCountryInfo(data);
+		});
 	};
 	return (
 		<div className="app">
@@ -46,7 +56,7 @@ const App = () => {
 							<MenuItem value="worldwide">Worldwide</MenuItem>
 							{countries.map((country) => {
 								return (
-									<MenuItem value={country.value}>{country.name}</MenuItem>
+									<MenuItem key={country.name} value={country.value}>{country.name}</MenuItem>
 								);
 							})}
 						</Select>
@@ -61,6 +71,14 @@ const App = () => {
 				
 				<Map />
 			</div>
+			
+			<Card className="app__right">
+				<CardContent>
+					<h3>Live Cases by Country</h3>
+					
+					<h3>Worldwide New Cases</h3>
+				</CardContent>
+			</Card>
 		
 		</div>
 	);
