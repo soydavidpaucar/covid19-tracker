@@ -1,6 +1,8 @@
 import { FormControl, MenuItem, Select } from '@mui/material';
 import './App.css';
 import { useEffect, useState } from 'react';
+import InfoBox from './InfoBox.js';
+import Map from './Map.js';
 
 const App = () => {
 	/* Set initial variable values */
@@ -49,8 +51,14 @@ const App = () => {
 					</Select>
 				</FormControl>
 			</div>
-		
-		
+			
+			<div className="app__stats">
+				<InfoBox title="Cases" cases={20000} total={2000} />
+				<InfoBox title="Recovered" cases={12031} total={300} />
+				<InfoBox title="Deaths" cases={1234} total={40000} />
+			</div>
+			
+			<Map />
 		</div>
 	);
 };
