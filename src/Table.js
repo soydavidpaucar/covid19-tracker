@@ -1,6 +1,17 @@
-const Table = () => {
+import './Table.css';
+
+const Table = ({ countries }) => {
 	return (
-		<div></div>
+		<div className="table">
+			{countries.map(({ country, cases }) => {
+				return (
+					<tr>
+						<td>{country}</td>
+						<td><strong>{cases}</strong></td>
+					</tr>
+				);
+			})}
+		</div>
 	);
 };
 
