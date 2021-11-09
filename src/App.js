@@ -38,27 +38,30 @@ const App = () => {
 	};
 	return (
 		<div className="app">
-			<div className="app__header">
-				<h1>COVID-19 Tracker</h1>
-				<FormControl className="app__dropdown">
-					<Select variant="outlined" value={country} onChange={onCountryChange}>
-						<MenuItem value="worldwide">Worldwide</MenuItem>
-						{countries.map((country) => {
-							return (
-								<MenuItem value={country.value}>{country.name}</MenuItem>
-							);
-						})}
-					</Select>
-				</FormControl>
+			<div className="app__left">
+				<div className="app__header">
+					<h1>COVID-19 Tracker</h1>
+					<FormControl className="app__dropdown">
+						<Select variant="outlined" value={country} onChange={onCountryChange}>
+							<MenuItem value="worldwide">Worldwide</MenuItem>
+							{countries.map((country) => {
+								return (
+									<MenuItem value={country.value}>{country.name}</MenuItem>
+								);
+							})}
+						</Select>
+					</FormControl>
+				</div>
+				
+				<div className="app__stats">
+					<InfoBox title="Cases" cases={20000} total={2000} />
+					<InfoBox title="Recovered" cases={12031} total={300} />
+					<InfoBox title="Deaths" cases={1234} total={40000} />
+				</div>
+				
+				<Map />
 			</div>
-			
-			<div className="app__stats">
-				<InfoBox title="Cases" cases={20000} total={2000} />
-				<InfoBox title="Recovered" cases={12031} total={300} />
-				<InfoBox title="Deaths" cases={1234} total={40000} />
-			</div>
-			
-			<Map />
+		
 		</div>
 	);
 };
