@@ -64,9 +64,9 @@ const App = () => {
 				</div>
 				
 				<div className="app__stats">
-					<InfoBox title="Cases" cases={20000} total={2000} />
-					<InfoBox title="Recovered" cases={12031} total={300} />
-					<InfoBox title="Deaths" cases={1234} total={40000} />
+					<InfoBox title="Cases" cases={countryInfo.todayCases} total={countryInfo.cases} />
+					<InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered} />
+					<InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths} />
 				</div>
 				
 				<Map />
